@@ -95,13 +95,120 @@ async function createEmployee(employee) {
 }
 // A function to get employee by email
 async function getEmployeeByEmail(employee_email) {
-  const query = "SELECT * FROM employee INNER JOIN employee_info ON employee.employee_id = employee_info.employee_id INNER JOIN employee_pass ON employee.employee_id = employee_pass.employee_id INNER JOIN employee_role ON employee.employee_id = employee_role.employee_id WHERE employee.employee_email = ?";
+  const query =
+    "SELECT * FROM employee INNER JOIN employee_info ON employee.employee_id = employee_info.employee_id INNER JOIN employee_pass ON employee.employee_id = employee_pass.employee_id INNER JOIN employee_role ON employee.employee_id = employee_role.employee_id WHERE employee.employee_email = ?";
   const [rows] = await conn.query(query, [employee_email]);
   return rows;
 }
+//A functoin to get all employees
+async function getAllEmployees() {
+  const query =
+    "SELECT * FROM employee INNER JOIN employee_info ON employee.employee_id = employee_info.employee_id INNER JOIN employee_role ON employee.employee_id = employee_role.employee_id INNER JOIN company_roles ON employee_role.company_role_id = company_roles.company_role_id ORDER BY employee.employee_id DESC limit 10";
+  const [rows] = await conn.query(query);
+  return rows;
+}
+//A function to update the employee
+async function updateEmployee(employeeId, updatedData) {
+  const queryCheck = "SELECT * FROM employee WHERE employee_id = ?";
+  try {
+    // Array to store any error messages if updates fail in individual tables
+    const errors = [];
+    // Check if the employee exists
+    const [result] = await conn.query(queryCheck, [employeeId]);
+    if (result.length === 0) {
+      return "not_found";
+    }
+    const [emailExit] = await getEmployeeByEmail(updatedData.employee_email);
+    if (emailExit) {
+      return "exist";
+    }
+    // Update the `employee` table (email and active status)
+    if (
+      updatedData.employee_email ||
+      updatedData.active_employee !== undefined
+    ) {
+      const queryEmployee = `
+        UPDATE employee 
+        SET employee_email = COALESCE(?, employee_email), 
+            active_employee = COALESCE(?, active_employee) 
+        WHERE employee_id = ?
+      `;
+      const [resultEmployee] = await conn.query(queryEmployee, [
+        updatedData.employee_email,
+        updatedData.active_employee,
+        employeeId,
+      ]);
+      if (resultEmployee.affectedRows === 0)
+        errors.push("Failed to update employee table");
+    }
 
+    // Update `employee_info` table (first name, last name, phone)
+    if (
+      updatedData.employee_first_name ||
+      updatedData.employee_last_name ||
+      updatedData.employee_phone
+    ) {
+      const queryInfo = `
+        UPDATE employee_info 
+        SET employee_first_name = COALESCE(?, employee_first_name), 
+            employee_last_name = COALESCE(?, employee_last_name), 
+            employee_phone = COALESCE(?, employee_phone)
+        WHERE employee_id = ?
+      `;
+      const [resultInfo] = await conn.query(queryInfo, [
+        updatedData.employee_first_name,
+        updatedData.employee_last_name,
+        updatedData.employee_phone,
+        employeeId,
+      ]);
+      if (resultInfo.affectedRows === 0)
+        errors.push("Failed to update employee_info table");
+    }
+
+    // Update `employee_pass` table (password)
+    const queryPass = `
+        UPDATE employee_pass 
+        SET employee_password_hashed = ? 
+        WHERE employee_id = ?
+      `;
+    const [resultPass] = await conn.query(queryPass, [
+      updatedData.employee_password,
+      employeeId,
+    ]);
+    if (resultPass.affectedRows === 0)
+      errors.push("Failed to update employee_pass table");
+
+    // Update `employee_role` table (role)
+    if (updatedData.company_role_id) {
+      const queryRole = `
+        UPDATE employee_role 
+        SET company_role_id = ? 
+        WHERE employee_id = ?
+      `;
+      const [resultRole] = await conn.query(queryRole, [
+        updatedData.company_role_id,
+        employeeId,
+      ]);
+      if (resultRole.affectedRows === 0)
+        errors.push("Failed to update employee_role table");
+    }
+
+    // Return results
+    // console.log(errors.length)
+    if (errors.length > 0) {
+      return { success: false, message: "Some updates failed", errors };
+    } else {
+      return { success: true, message: "Employee updated successfully" };
+    }
+  } catch (error) {
+    console.error("Error in updateEmployee:", error);
+    throw new Error("Unexpected server error");
+  }
+}
 module.exports = {
   checkIfEmployeeExists,
   createEmployee,
   getEmployeeByEmail,
+  getAllEmployees,
+  updateEmployee,
 };
