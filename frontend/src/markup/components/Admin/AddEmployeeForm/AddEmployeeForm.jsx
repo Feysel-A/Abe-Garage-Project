@@ -3,9 +3,9 @@ import "../../../../assets/template_assets/css/style.css";
 // import employee.service.js
 import employeeService from "../../../../services/employee.service";
 // // Import the useAuth hook
-// import { useAuth } from "../../../../Contexts/AuthContext";
+import { useAuth } from "../../../../Context/AuthContext";
 
-function AddEmployee(props) {
+function AddEmployeeForm(props) {
   const [employee_email, setEmail] = useState("");
   const [employee_first_name, setFirstName] = useState("");
   const [employee_last_name, setLastName] = useState("");
@@ -21,12 +21,12 @@ function AddEmployee(props) {
   const [serverError, setServerError] = useState("");
 
   // Create a variable to hold the user's token
-  //   let loggedInEmployeeToken = "";
-  //   // Destructure the auth hook and get the token
-  //   const { employee } = useAuth();
-  //   if (employee && employee.employee_token) {
-  //     loggedInEmployeeToken = employee.employee_token;
-  //   }
+  let loggedInEmployeeToken = "";
+  // Destructure the auth hook and get the token
+  const { employee } = useAuth();
+  if (employee && employee.employee_token) {
+    loggedInEmployeeToken = employee.employee_token;
+  }
 
   const handleSubmit = (e) => {
     // Prevent the default behavior of the form
@@ -77,8 +77,8 @@ function AddEmployee(props) {
     };
     // Pass the form data to the service
     const newEmployee = employeeService.createEmployee(
-      formData
-      // ,loggedInEmployeeToken
+      formData,
+      loggedInEmployeeToken
     );
     newEmployee
       .then((response) => response.json())
@@ -229,4 +229,4 @@ function AddEmployee(props) {
   );
 }
 
-export default AddEmployee;
+export default AddEmployeeForm;

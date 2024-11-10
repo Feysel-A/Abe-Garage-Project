@@ -1,6 +1,6 @@
 import React from "react";
 import SideBar from "../../../components/Admin/SIdeBar/SideBar";
-import Addemployee from "../../../components/Admin/AddEmployee/AddEmployee";
+import AddEmployeeForm from "../../../components/Admin/AddEmployeeForm/AddEmployeeForm";
 
 function AddEmployee() {
   return (
@@ -11,7 +11,7 @@ function AddEmployee() {
             <SideBar />
           </div>
           <div className="col-md-9">
-            <Addemployee />
+            <AddEmployeeForm />
           </div>
         </div>
       </div>

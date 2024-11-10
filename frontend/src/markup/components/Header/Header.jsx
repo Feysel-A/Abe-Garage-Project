@@ -1,7 +1,21 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import  logo from "../../../assets/images/logo.png"
+import React from "react";
+import { Link } from "react-router-dom";
+import logo from "../../../assets/images/logo.png";
+// Import the login service to access the logout function
+import loginService from "../../../Services/login.service";
+import { useAuth } from "../../../Context/AuthContext";
 function Header() {
+  // Use the custom hook to access the data in the context
+  const { isLogged, setIsLogged, employee } = useAuth();
+  // console.log(useAuth());
+
+  // Log out event handler function
+  const logOut = () => {
+    // Call the logout function from the login service
+    loginService.logOut();
+    // Set the isLogged state to false
+    setIsLogged(false);
+  };
   return (
     <div>
       <header className="main-header header-style-one">
@@ -15,19 +29,17 @@ function Header() {
                 </div>
               </div>
               <div className="right-column">
-                {/* {isLogged ? (
+                {isLogged ? (
                   <div className="link-btn">
                     <div className="phone-number">
-                      <strong>Welcome 
-                        {employee?.employee_first_name}
-                        </strong>
+                      <strong>Welcome {employee?.employee_first_name}</strong>
                     </div>
                   </div>
-                ) : ( */}
+                ) : (
                   <div className="phone-number">
                     Schedule Appointment: <strong>1800 456 7890 </strong>{" "}
                   </div>
-                {/* )} */}
+                )}
               </div>
             </div>
           </div>
@@ -54,23 +66,23 @@ function Header() {
                     >
                       <ul className="navigation">
                         <li className="dropdown">
-                          <a href="/">Home</a>
+                          <Link to="/">Home</Link>
                         </li>
                         <li className="dropdown">
-                          <a href="/about">About Us</a>
+                          <Link to="/about">About Us</Link>
                         </li>
                         <li className="dropdown">
-                          <a href="/services">Services</a>
+                          <Link to="/services">Services</Link>
                         </li>
                         <li>
-                          <a href="/contact">Contact Us</a>
+                          <Link to="/contact">Contact Us</Link>
                         </li>
                       </ul>
                     </div>
                   </nav>
                 </div>
                 <div className="search-btn"></div>
-                {/* {isLogged ? (
+                {isLogged ? (
                   <div className="link-btn">
                     <Link
                       to="/"
@@ -80,13 +92,13 @@ function Header() {
                       Log out
                     </Link>
                   </div>
-                ) : ( */}
+                ) : (
                   <div className="link-btn">
                     <Link to="/login" className="theme-btn btn-style-one">
                       Login
                     </Link>
                   </div>
-                {/* )} */}
+                )}
               </div>
             </div>
           </div>
@@ -146,4 +158,4 @@ function Header() {
   );
 }
 
-export default Header
+export default Header;
