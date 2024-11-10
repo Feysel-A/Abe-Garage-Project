@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom"
 import Home from "./markup/pages/Home/Home"
 import Login from "./markup/pages/Login/Login"
-import Addemployee from "./markup/pages/Admin/AddEmployee/Addemployee"
+import AddEmployee from "./markup/pages/Admin/AddEmployee/AddEmployee";
 import "./assets/template_assets/css/bootstrap.css";
 import "./assets/template_assets/css/style.css";
 import "./assets/template_assets/css/responsive.css";
@@ -44,7 +44,7 @@ function App() {
         <Route
           path="/admin/customers"
           element={
-            <PrivateAuthRoute roles={[1, 2, 3]}>
+            <PrivateAuthRoute roles={[2, 3]}>
               <Customers />
             </PrivateAuthRoute>
           }
@@ -62,7 +62,7 @@ function App() {
           path="/admin/add-employee"
           element={
             <PrivateAuthRoute roles={[3]}>
-              <Addemployee />
+              <AddEmployee />
             </PrivateAuthRoute>
           }
         />
