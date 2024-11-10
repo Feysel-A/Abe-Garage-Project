@@ -20,6 +20,16 @@ router.get(
 );
 
 // PUT request to update employee details
-router.put('/api/employee/:id', authMiddleware.verifyToken, employeeController.updateEmployee);
+router.put(
+  "/api/employee/:id",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  employeeController.updateEmployee
+);
+// Delete request to delete employee
+router.delete(
+  "/api/employee/:id",
+  [authMiddleware.verifyToken, authMiddleware.isAdmin],
+  employeeController.deleteEmployee
+);
 // Export the router
 module.exports = router;

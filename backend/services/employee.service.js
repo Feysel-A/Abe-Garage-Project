@@ -2,32 +2,44 @@
 const conn = require("../config/db.config");
 // Import the bcrypt module
 const bcrypt = require("bcrypt");
-
+//Import the uuid module
+const { v4: uuidv4 } = require("uuid");
 // A function to check if an employee exists in the database
 async function checkIfEmployeeExists(email) {
   console.log("Checking if employee exists with email:", email);
   const query = "SELECT employee_id FROM employee WHERE employee_email = ?";
   const [rows] = await conn.query(query, [email]);
-  console.log("Employee exists:", rows.length > 0);
-  return rows.length > 0;
+  // console.log("Employee exists:", rows.length > 0);
+  return rows;
 }
-
+// Function to get Employee ID by UUID
+async function getEmployeeId(uuid) {
+  const query = "SELECT employee_id FROM employee WHERE employee_uuid = ?";
+  const [rows] = await conn.query(query, [uuid]);
+  return rows;
+}
 // A function to create a new employee
 async function createEmployee(employee) {
   console.log("Creating employee with data:", employee);
   let createdEmployee = {};
 
   try {
+    // Generate a UUID for the new employee
+    const employeeUUID = uuidv4();
+
     // Generate a salt and hash the password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(employee.employee_password, salt);
 
-    // Insert email and active status into employee table
-    const query1 =
-      "INSERT INTO employee (employee_email, active_employee) VALUES (?, ?)";
+    // Insert email, active status, and UUID into the employee table
+    const query1 = `
+      INSERT INTO employee (employee_email, active_employee, employee_uuid)
+      VALUES (?, ?, ?)
+    `;
     const [rows1] = await conn.query(query1, [
       employee.employee_email,
       employee.active_employee,
+      employeeUUID,
     ]);
 
     if (rows1.affectedRows !== 1) {
@@ -84,6 +96,7 @@ async function createEmployee(employee) {
       employee_id: employee_id,
       employee_email: employee.employee_email,
       active_employee: employee.active_employee,
+      employee_uuid: employeeUUID, // include the UUID in the returned object
     };
   } catch (error) {
     console.error("Error in createEmployee:", error);
@@ -93,6 +106,7 @@ async function createEmployee(employee) {
   // Return the created employee object
   return createdEmployee;
 }
+
 // A function to get employee by email
 async function getEmployeeByEmail(employee_email) {
   const query =
@@ -205,10 +219,34 @@ async function updateEmployee(employeeId, updatedData) {
     throw new Error("Unexpected server error");
   }
 }
+//A function to delete the employee
+async function deleteEmployee(employeeId) {
+  try {
+    // Delete employee from all related tables
+    await conn.query("DELETE FROM employee_pass WHERE employee_id = ?", [
+      employeeId,
+    ]);
+    await conn.query("DELETE FROM employee_info WHERE employee_id = ?", [
+      employeeId,
+    ]);
+    await conn.query("DELETE FROM employee_role WHERE employee_id = ?", [
+      employeeId,
+    ]);
+    await conn.query("DELETE FROM employee WHERE employee_id = ?", [
+      employeeId,
+    ]);
+    return "success";
+  } catch (error) {
+    console.log(error);
+    return error;
+  }
+}
 module.exports = {
   checkIfEmployeeExists,
   createEmployee,
   getEmployeeByEmail,
   getAllEmployees,
   updateEmployee,
+  getEmployeeId,
+  deleteEmployee,
 };

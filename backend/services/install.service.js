@@ -8,7 +8,7 @@ const fs = require("fs");
 const install = async () => {
   try {
     //Get sql file path from config
-    const sqlFilePath = path.resolve(__dirname, '../config/initial-queries.sql');
+    const sqlFilePath = path.resolve(__dirname, './sql/initial-queries.sql');
     // Step 1: Read SQL file
     const sql = fs.readFileSync(sqlFilePath, "utf8");
 
@@ -23,7 +23,7 @@ const install = async () => {
       await dbConfig.query(statement);
     }
     await dbConfig.end();
-    return "Database installation successful";
+    return "Database installation successfull";
   } catch (error) {
     console.error("Error installing database:", error);
     return "Database installation failed";
