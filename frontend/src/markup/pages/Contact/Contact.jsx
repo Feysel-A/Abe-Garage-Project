@@ -1,11 +1,16 @@
 import React from 'react'
+import AboutUs5 from '../../components/AboutUs/AboutUs5/AboutUs'
+import ContactComponent from '../../components/Contact/Contact'
+import AboutUs4 from '../../components/AboutUs/AboutUs4/AboutUs4'
 
 function Contact() {
   return (
-    <div>
-      <h1>Contact page</h1>
-    </div>
-  )
+    <>
+      <AboutUs5 title={"Contact Us"} />
+      <ContactComponent/>
+      <AboutUs4/>
+    </>
+  );
 }
 
 export default Contact

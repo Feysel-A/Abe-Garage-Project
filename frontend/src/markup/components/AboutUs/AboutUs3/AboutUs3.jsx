@@ -1,5 +1,5 @@
 import React from 'react'
-import img from "../../../../assets/template_assets/images/background/bg-1.jpg";
+import img from "../../../../assets/images/bg/bg2.png";
 function AboutUs3() {
   return (
     <section className="video-section">
