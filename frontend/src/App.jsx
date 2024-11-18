@@ -15,7 +15,7 @@ import Unauthorized from "./markup/pages/Unauthorized/Unauthorized";
 import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute";
 import Orders from "./markup/pages/Admin/Orders/Orders";
 import Customers from  "./markup/pages/Admin/Customer/Customer"
-import Employees from "./markup/components/Admin/Employee/Employee";
+import Employees from "./markup/pages/Admin/Employee/Employee";
 import About from "./markup/pages/About/About";
 import Contact from "./markup/pages/Contact/Contact";
 import Service from "./markup/pages/Service/Service";

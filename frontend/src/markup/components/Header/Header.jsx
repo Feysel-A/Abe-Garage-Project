@@ -32,7 +32,9 @@ function Header() {
                 {isLogged ? (
                   <div className="link-btn">
                     <div className="phone-number">
-                      <strong>Welcome {employee?.employee_first_name}</strong>
+                      <strong style={{ paddingRight: "10px" }}>
+                        Welcome {employee?.employee_first_name}
+                      </strong>
                     </div>
                   </div>
                 ) : (
