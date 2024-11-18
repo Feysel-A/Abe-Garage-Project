@@ -4,18 +4,18 @@ import AddEmployeeForm from "../../../components/Admin/AddEmployeeForm/AddEmploy
 
 function AddEmployee() {
   return (
-    <div>
-      <div className="container-fluid">
+    <>
+      <div className="container-fluid admin-pages">
         <div className="row">
-          <div className="col-md-3">
+          <div className="col-md-3 admin-left-side">
             <SideBar />
           </div>
           <div className="col-md-9">
-            <AddEmployeeForm />
+            <AddEmployeeForm/>
           </div>
         </div>
       </div>
-    </div>
+      </>
   );
 }
 

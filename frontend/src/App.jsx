@@ -19,6 +19,7 @@ import Employees from "./markup/components/Admin/Employee/Employee";
 import About from "./markup/pages/About/About";
 import Contact from "./markup/pages/Contact/Contact";
 import Service from "./markup/pages/Service/Service";
+import Dashboard from "./markup/pages/Admin/AdminDashboard/Admin";
 function App() {
 
   return (
@@ -63,6 +64,14 @@ function App() {
           element={
             <PrivateAuthRoute roles={[3]}>
               <AddEmployee />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route
+          path="/admin"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <Dashboard />
             </PrivateAuthRoute>
           }
         />
