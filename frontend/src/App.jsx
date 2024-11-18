@@ -1,27 +1,27 @@
-import { Route, Routes } from "react-router-dom"
-import Home from "./markup/pages/Home/Home"
-import Login from "./markup/pages/Login/Login"
+import { Route, Routes } from "react-router-dom";
+import Home from "./markup/pages/Home/Home";
+import Login from "./markup/pages/Login/Login";
 import AddEmployee from "./markup/pages/Admin/AddEmployee/AddEmployee";
 import "./assets/template_assets/css/bootstrap.css";
 import "./assets/template_assets/css/style.css";
 import "./assets/template_assets/css/responsive.css";
 import "./assets/template_assets/css/color.css";
-import "./assets/styles/custom.css"
+import "./assets/styles/custom.css";
 import Header from "./markup/components/Header/Header";
 import Footer from "./markup/components/Footer/Footer";
 //Import the custom styles
-import './assets/styles/custom.css'
+import "./assets/styles/custom.css";
 import Unauthorized from "./markup/pages/Unauthorized/Unauthorized";
 import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute";
 import Orders from "./markup/pages/Admin/Orders/Orders";
-import Customers from  "./markup/pages/Admin/Customer/Customer"
+import Customers from "./markup/pages/Admin/Customer/Customer";
 import Employees from "./markup/pages/Admin/Employee/Employee";
 import About from "./markup/pages/About/About";
 import Contact from "./markup/pages/Contact/Contact";
 import Service from "./markup/pages/Service/Service";
 import Dashboard from "./markup/pages/Admin/AdminDashboard/Admin";
+import UpdateEmployee from "./markup/pages/Admin/Update/UpdateEmployee";
 function App() {
-
   return (
     <>
       <Header />
@@ -75,10 +75,18 @@ function App() {
             </PrivateAuthRoute>
           }
         />
+        <Route
+          path="/admin/update/employee"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <UpdateEmployee />
+            </PrivateAuthRoute>
+          }
+        />
       </Routes>
       <Footer />
     </>
   );
 }
 
-export default App
+export default App;

@@ -18,7 +18,12 @@ router.get(
   [authMiddleware.verifyToken, authMiddleware.isAdmin],
   employeeController.getAllEmployees
 );
-
+//Craete a route to handle the get single employee
+router.get("/api/employee/single/:uuid", [
+  authMiddleware.verifyToken,
+  authMiddleware.isAdmin,
+  employeeController.getSingleEmployee
+]);
 // PUT request to update employee details
 router.put(
   "/api/employee/:id",
