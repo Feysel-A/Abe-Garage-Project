@@ -4,12 +4,17 @@ import { Table, Button } from "react-bootstrap";
 // Import the auth hook
 import { useAuth } from "../../../../Context/AuthContext";
 // Import the date-fns library
-import { format } from 'date-fns';
+import { format } from "date-fns";
 // To properly format the date on the table
 // Import the getAllEmployees function
 import employeeService from "../../../../services/employee.service";
-
+import { useNavigate } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert"; // Import
+import "react-confirm-alert/src/react-confirm-alert.css";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
 function EmployeeList() {
+  const navigate = useNavigate();
   // Create all the states we need to store the data
   // Create the employees state to store the employees data
   const [employees, setEmployees] = useState([]);
@@ -23,6 +28,33 @@ function EmployeeList() {
   if (employee) {
     token = employee.employee_token;
   }
+  const editEmployee = (uuid) => {
+    navigate(`/admin/update/employee/${uuid}`);
+  };
+  const deleteEmployee = (uuid) => {
+    confirmAlert({
+      title: "Confirm to delete",
+      message: "Are you sure to delete this employee.",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () =>
+            employeeService
+              .deleteEmployee(uuid, token)
+              .then((res) => {
+                return res.json();
+              })
+              .then((data) => {
+                console.log(data.message);
+                alert(data.message);
+              }),
+        },
+        {
+          label: "No",
+        },
+      ],
+    });
+  };
   useEffect(() => {
     // Call the getAllEmployees function
     const allEmployees = employeeService.getAllEmployees(token);
@@ -43,15 +75,15 @@ function EmployeeList() {
       })
       .then((data) => {
         if (data?.data?.length !== 0) {
-        console.log(data)
+          console.log(data);
           setEmployees(data.data);
         }
       })
       .catch((err) => {
         console.log(err);
       });
-  }, []);
-//   console.log(employees);
+  }, [employees]);
+  //   console.log(employees);
   return (
     <>
       {apiError ? (
@@ -72,7 +104,7 @@ function EmployeeList() {
               <Table striped bordered hover>
                 <thead>
                   <tr>
-                    <th>Active</th>
+                    <th>Actives</th>
                     <th>First Name</th>
                     <th>Last Name</th>
                     <th>Email</th>
@@ -98,7 +130,20 @@ function EmployeeList() {
                       </td>
                       <td>{employee.company_role_name}</td>
                       <td>
-                        <div className="edit-delete-icons">edit | delete</div>
+                        <div className="edit-delete-icons">
+                          <button
+                            onClick={() => editEmployee(employee.employee_uuid)}
+                          >
+                            <FaEdit />
+                          </button>
+                          <button
+                            onClick={() =>
+                              deleteEmployee(employee.employee_uuid)
+                            }
+                          >
+                            <MdDelete />
+                          </button>
+                        </div>
                       </td>
                     </tr>
                   ))}

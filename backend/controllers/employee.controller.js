@@ -27,8 +27,9 @@ async function createEmployee(req, res, next) {
   const employeeExists = await employeeService.checkIfEmployeeExists(
     req.body.employee_email
   );
+  console.log(employeeExists.length);
   // If employee exists, send a response to the client
-  if (employeeExists) {
+  if (employeeExists.length > 0) {
     res.status(400).json({
       error: "This email address is already associated with another employee!",
     });
