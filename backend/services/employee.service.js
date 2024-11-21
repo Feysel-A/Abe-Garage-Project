@@ -123,7 +123,7 @@ async function getAllEmployees() {
 }
 //A function to get single employee
 async function getEmployeeById(uuid) {
-const query = `
+  const query = `
   SELECT 
     e.employee_id, e.employee_uuid, e.employee_email, e.active_employee, 
     e.added_date, ei.employee_first_name, ei.employee_last_name, 
@@ -134,28 +134,27 @@ const query = `
   JOIN company_roles AS cr ON er.company_role_id = cr.company_role_id
   WHERE e.employee_uuid = ?;
 `;
-try {
-  const [result] = await conn.query(query, [uuid]);
-  return result[0]; // Return the first matching employee or undefined if not found
-} catch (error) {
-  throw new Error("Failed to fetch employee: " + error.message);
-}
+  try {
+    const [result] = await conn.query(query, [uuid]);
+    return result[0]; // Return the first matching employee or undefined if not found
+  } catch (error) {
+    throw new Error("Failed to fetch employee: " + error.message);
+  }
 }
 //A function to update the employee
 async function updateEmployee(employeeId, updatedData) {
-  const queryCheck = "SELECT * FROM employee WHERE employee_id = ?";
+  // const queryCheck =
+  //   "SELECT employee_id FROM employee WHERE employee_uuid = ?";
   try {
-    // Array to store any error messages if updates fail in individual tables
+    //   // Array to store any error messages if updates fail in individual tables
     const errors = [];
-    // Check if the employee exists
-    const [result] = await conn.query(queryCheck, [employeeId]);
-    if (result.length === 0) {
-      return "not_found";
-    }
-    const [emailExit] = await getEmployeeByEmail(updatedData.employee_email);
-    if (emailExit) {
-      return "exist";
-    }
+    //   // Check if the employee exists
+    //   const [result] = await conn.query(queryCheck, [employeeId]);
+    //   if (result.length === 0) {
+    //     return "not_found";
+    //   }
+    const result = await getEmployeeId(employeeId);
+    const employee_id = result[0].employee_id;
     // Update the `employee` table (email and active status)
     if (
       updatedData.employee_email ||
@@ -170,7 +169,7 @@ async function updateEmployee(employeeId, updatedData) {
       const [resultEmployee] = await conn.query(queryEmployee, [
         updatedData.employee_email,
         updatedData.active_employee,
-        employeeId,
+        employee_id,
       ]);
       if (resultEmployee.affectedRows === 0)
         errors.push("Failed to update employee table");
@@ -193,24 +192,24 @@ async function updateEmployee(employeeId, updatedData) {
         updatedData.employee_first_name,
         updatedData.employee_last_name,
         updatedData.employee_phone,
-        employeeId,
+        employee_id,
       ]);
       if (resultInfo.affectedRows === 0)
         errors.push("Failed to update employee_info table");
     }
 
     // Update `employee_pass` table (password)
-    const queryPass = `
-        UPDATE employee_pass 
-        SET employee_password_hashed = ? 
-        WHERE employee_id = ?
-      `;
-    const [resultPass] = await conn.query(queryPass, [
-      updatedData.employee_password,
-      employeeId,
-    ]);
-    if (resultPass.affectedRows === 0)
-      errors.push("Failed to update employee_pass table");
+    // const queryPass = `
+    //     UPDATE employee_pass 
+    //     SET employee_password_hashed = ? 
+    //     WHERE employee_id = ?
+    //   `;
+    // const [resultPass] = await conn.query(queryPass, [
+    //   updatedData.employee_password,
+    //   employee_id,
+    // ]);
+    // if (resultPass.affectedRows === 0)
+    //   errors.push("Failed to update employee_pass table");
 
     // Update `employee_role` table (role)
     if (updatedData.company_role_id) {
@@ -221,7 +220,7 @@ async function updateEmployee(employeeId, updatedData) {
       `;
       const [resultRole] = await conn.query(queryRole, [
         updatedData.company_role_id,
-        employeeId,
+        employee_id,
       ]);
       if (resultRole.affectedRows === 0)
         errors.push("Failed to update employee_role table");
@@ -235,7 +234,7 @@ async function updateEmployee(employeeId, updatedData) {
       return { success: true, message: "Employee updated successfully" };
     }
   } catch (error) {
-    console.error("Error in updateEmployee:", error);
+    console.error("Error in updateEmployee:", error.message);
     throw new Error("Unexpected server error");
   }
 }

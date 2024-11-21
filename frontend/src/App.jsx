@@ -76,7 +76,7 @@ function App() {
           }
         />
         <Route
-          path="/admin/update/employee/:uuid"
+          path="/admin/update/employee/:employee_hash"
           element={
             <PrivateAuthRoute roles={[3]}>
               <UpdateEmployee />

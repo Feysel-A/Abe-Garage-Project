@@ -94,7 +94,6 @@ async function updateEmployee(req, res) {
   try {
     const employeeId = req.params.id;
     const {
-      employee_email,
       employee_first_name,
       employee_last_name,
       employee_phone,
@@ -105,11 +104,11 @@ async function updateEmployee(req, res) {
 
     // Validate required fields (e.g., email)
     if (
-      !employee_email ||
       !employee_first_name ||
       !employee_last_name ||
       !employee_phone ||
-      !company_role_id
+      !company_role_id ||
+      !active_employee
     ) {
       return res
         .status(400)
@@ -118,7 +117,6 @@ async function updateEmployee(req, res) {
 
     // Prepare data for update
     let updatedData = {
-      employee_email,
       employee_first_name,
       employee_last_name,
       employee_phone,
