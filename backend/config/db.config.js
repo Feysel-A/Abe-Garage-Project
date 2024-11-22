@@ -12,7 +12,7 @@ connection.getConnection()
         console.log('Database connected');
     })
    .catch(err => {
-        console.log('Database connection failed');
+        console.log('Database connection failed',err);
     })
 
 module.exports = connection;
