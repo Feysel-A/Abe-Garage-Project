@@ -21,6 +21,7 @@ import Contact from "./markup/pages/Contact/Contact";
 import Service from "./markup/pages/Service/Service";
 import Dashboard from "./markup/pages/Admin/AdminDashboard/Admin";
 import UpdateEmployee from "./markup/pages/Admin/Update/UpdateEmployee";
+import AddOrder from "./markup/pages/Admin/AddOrder/AddOrder";
 function App() {
   return (
     <>
@@ -80,6 +81,14 @@ function App() {
           element={
             <PrivateAuthRoute roles={[3]}>
               <UpdateEmployee />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route
+          path="/admin/order"
+          element={
+            <PrivateAuthRoute roles={[3]}>
+              <AddOrder />
             </PrivateAuthRoute>
           }
         />
