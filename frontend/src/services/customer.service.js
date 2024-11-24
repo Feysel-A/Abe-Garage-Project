@@ -13,7 +13,23 @@ const getAllCustomer = async (token) => {
   const response = await fetch(`${api_url}/api/all-customers`, requestOptions);
   return response;
 };
+//A function to send get request to get single customer
+const getSingleCustomer = async (customer_hash,token) => {
+    const requestOptions = {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "x-access-token": token,
+        },
+    };
+    const response = await fetch(
+        `${api_url}/api/customer/${customer_hash}`,
+        requestOptions
+    );
+    return response;
+}
 const customerService = {
-    getAllCustomer
+    getAllCustomer,
+    getSingleCustomer
 }
 export default customerService;

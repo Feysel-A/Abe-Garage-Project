@@ -33,7 +33,6 @@ function AddOrder() {
   const handleSearch = (e) => {
     const query = e.target.value;
     setSearchQuery(query);
-
     if (query) {
       const filtered = customersData.filter(
         (customer) =>
@@ -47,16 +46,18 @@ function AddOrder() {
           customer.customer_phone_number
             .toLowerCase()
             .includes(query.toLowerCase())
+            
       );
       setFilteredCustomers(filtered);
     } else {
       setFilteredCustomers([]);
     }
   };
-
-  const handleSelectCustomer = (customer_id) => {
+console.log(filteredCustomers)
+  const handleSelectCustomer = (customer_hash) => {
     navigate(
-      `/admin/customers/customer-profile/${customer_id}?view=chooseVehicle`
+      `/admin/customer-profile/${customer_hash}`
+      // ?view=chooseVehicle`
     );
   };
 
@@ -116,7 +117,8 @@ function AddOrder() {
                   <td>
                     <FaHandPointer
                       className={styles.pointerIcon}
-                      onClick={() => handleSelectCustomer(customer.customer_id)}
+                      onClick={() => handleSelectCustomer(customer.customer_hash
+                      )}
                     />
                   </td>
                 </tr>
