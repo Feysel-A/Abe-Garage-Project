@@ -49,7 +49,8 @@ CREATE TABLE IF NOT EXISTS `common_services` (
   PRIMARY KEY (service_id)
 ) ENGINE=InnoDB;
 
--- Employee tables 
+-- Employee tables PRICE
+
 CREATE TABLE IF NOT EXISTS `employee` (
   `employee_id` int(11) NOT NULL AUTO_INCREMENT,
   `employee_email` varchar(255) NOT NULL,
