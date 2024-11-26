@@ -1,4 +1,4 @@
-// controllers/commonServiceController.js
+// controllers/serviceController.js
 const { addService, getServices,getServicesById,updateService,deleteService} = require("../services/service.service");
 
 // Add a new service
