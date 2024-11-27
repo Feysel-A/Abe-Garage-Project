@@ -79,52 +79,53 @@ async function getsingleOrder(req, res, next) {
     });
   }
 }
+async function customerOrders(req, res, next) {
+  try {
+    const customerOrder = await customerOrderss(req.params.hash);
 
-// async function updateorder(req, res, next) {
-//   try {
-//     const updateOrder = updateOrderr(req.body);
+    if (!customerOrder.length) {
+      return res.status(400).json({
+        error: "No Order Found!",
+      });
+    } else {
+      return res.status(200).json({
+        status: "Order Found!!",
+        customerOrder: customerOrder,
+      });
+    }
+  } catch (error) {
+    res.status(404).json({
+      error: "Something went wrong!",
+    });
+  }
+}
+async function updateOrder(req, res, next) {
+  try {
+    const updateOrder = updateOrderr(req.body);
 
-//     if (!updateOrder) {
-//       res.status(400).json({
-//         error: "Failed to Update the Order!",
-//       });
-//     } else {
-//       res.status(200).json({
-//         status: "Order Updated successfully! ",
-//       });
-//     }
-//   } catch (error) {
-//     res.status(404).json({
-//       error: "Something went wrong!",
-//     });
-//   }
-// }
+    if (!updateOrder) {
+      res.status(400).json({
+        error: "Failed to Update the Order!",
+      });
+    } else {
+      res.status(200).json({
+        status: "Order Updated successfully! ",
+      });
+    }
+  } catch (error) {
+    console.log(error)
+    res.status(404).json({
+      error: "Something went wrong!",
+    });
+  }
+}
 
-// async function customerOrders(req, res, next) {
-//   try {
-//     const customerOrder = await customerOrderss(req.params.hash);
 
-//     if (!customerOrder.length) {
-//       return res.status(400).json({
-//         error: "No Order Found!",
-//       });
-//     } else {
-//       return res.status(200).json({
-//         status: "Order Found!!",
-//         customerOrder: customerOrder,
-//       });
-//     }
-//   } catch (error) {
-//     res.status(404).json({
-//       error: "Something went wrong!",
-//     });
-//   }
-// }
 
 module.exports = {
   createOrder,
   getAllOrders,
   getsingleOrder,
-  // updateorder,
-  // customerOrders,
+  updateOrder,
+  customerOrders
 };
