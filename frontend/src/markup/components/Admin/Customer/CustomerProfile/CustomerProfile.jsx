@@ -5,9 +5,10 @@ import { format } from "date-fns";
 import { FaEdit, FaHandPointer, FaWindowClose } from "react-icons/fa";
 import { useAuth } from "../../../../../Context/AuthContext";
 import vehicleService from "../../../../../services/vehicle.service";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import customerService from "../../../../../services/customer.service";
 function CustomerProfile() {
+  const navigator = useNavigate();
   const [additionalRequest, setAdditionalRequest] = useState("");
   const [price, setPrice] = useState("");
   const [vehicles, setVehicles] = useState([]);
@@ -21,9 +22,11 @@ function CustomerProfile() {
   if (employee && employee.employee_token) {
     token = employee.employee_token;
   }
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert("Order submitted successfully!");
+  const handleSelectCustomer = (customer_hash) => {
+    // e.preventDefault();
+    navigator(
+      `/admin/order/add-new-order/select-service/${customer_hash}/${vehicles.vehicle_id}`
+    );
   };
   useEffect(() => {
     const fetchSingleCustomer = customerService
@@ -82,41 +85,45 @@ function CustomerProfile() {
             <h3>Choose a vehicle d</h3>
           </div>
           <div className={styles.table}>
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Year</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Tag</th>
-                <th>Type</th>
-                <th>Serial</th>
-                <th>Color</th>
-                <th>Mileage</th>
-                <th>Choose</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{vehicles?.vehicle_year}</td>
-                <td>{vehicles?.vehicle_make}</td>
-                <td>{vehicles?.vehicle_model}</td>
-                <td>{vehicles?.vehicle_tag}</td>
-                <td>{vehicles?.vehicle_type}</td>
-                <td>{vehicles?.vehicle_serial}</td>
-                <td>{vehicles?.vehicle_color}</td>
-                <td>{vehicles?.vehicle_mileage}</td>
-                <td>
-                  <FaHandPointer
-                  // className={styles.pointerIcon}
-                  // onClick={() => handleSelectCustomer(customer.customer_id)}
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </Table>
+            <Table striped bordered hover>
+              <thead>
+                <tr>
+                  <th>Year</th>
+                  <th>Make</th>
+                  <th>Model</th>
+                  <th>Tag</th>
+                  <th>Type</th>
+                  <th>Serial</th>
+                  <th>Color</th>
+                  <th>Mileage</th>
+                  <th>Choose</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{vehicles?.vehicle_year}</td>
+                  <td>{vehicles?.vehicle_make}</td>
+                  <td>{vehicles?.vehicle_model}</td>
+                  <td>{vehicles?.vehicle_tag}</td>
+                  <td>{vehicles?.vehicle_type}</td>
+                  <td>{vehicles?.vehicle_serial}</td>
+                  <td>{vehicles?.vehicle_color}</td>
+                  <td>{vehicles?.vehicle_mileage}</td>
+                  <td>
+                    <button>
+                      <FaHandPointer
+                        color="#EE0D19"
+                        className={styles.pointerIcon}
+                        onClick={() =>
+                          handleSelectCustomer(customer.customer_hash)
+                        }
+                      />
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </Table>
           </div>
-          
         </div>
       </section>
     </div>

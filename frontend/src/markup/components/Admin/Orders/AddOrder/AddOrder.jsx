@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./AddOrder.module.css";
 import { FaHandPointer } from "react-icons/fa";
-import customerService from "../../../../services/customer.service";
+import customerService from "../../../../../services/customer.service";
 
 function AddOrder() {
   const [customersData, setCustomersData] = useState([]);

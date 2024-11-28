@@ -22,7 +22,8 @@ import Service from "./markup/pages/Service/Service";
 import Dashboard from "./markup/pages/Admin/AdminDashboard/Admin";
 import UpdateEmployee from "./markup/pages/Admin/Update/UpdateEmployee";
 import AddOrder from "./markup/pages/Admin/AddOrder/AddOrder";
-import CustomerProfilePage from "./markup/pages/Admin/Customer/CustomerProfile/CustomerProfilePage"
+import CustomerProfilePage from "./markup/pages/Admin/Customer/CustomerProfile/CustomerProfilePage";
+import CreateNewOrder from "./markup/pages/Admin/Orders/CreateNewOrder/CreateNewOrder";
 function App() {
   return (
     <>
@@ -93,11 +94,20 @@ function App() {
             </PrivateAuthRoute>
           }
         />
-      <Route
+        <Route
           path="/admin/customer-profile/:customer_hash"
           element={
             <PrivateAuthRoute roles={[3]}>
-             <CustomerProfilePage/>
+              <CustomerProfilePage />
+            </PrivateAuthRoute>
+          }
+        />
+        {/* Add customer service Order Page Route*/}
+        <Route
+          path="admin/order/add-new-order/select-service/:customer_hash/:vehicle_id"
+          element={
+            <PrivateAuthRoute roles={[1, 2, 3]}>
+              <CreateNewOrder />
             </PrivateAuthRoute>
           }
         />
