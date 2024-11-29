@@ -24,6 +24,7 @@ import UpdateEmployee from "./markup/pages/Admin/Update/UpdateEmployee";
 import AddOrder from "./markup/pages/Admin/AddOrder/AddOrder";
 import CustomerProfilePage from "./markup/pages/Admin/Customer/CustomerProfile/CustomerProfilePage";
 import CreateNewOrder from "./markup/pages/Admin/Orders/CreateNewOrder/CreateNewOrder";
+import OrderDetail from "./markup/pages/Admin/Orders/OrderDetail/OrderDetail";
 function App() {
   return (
     <>
@@ -108,6 +109,14 @@ function App() {
           element={
             <PrivateAuthRoute roles={[1, 2, 3]}>
               <CreateNewOrder />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route
+          path="admin/order/:order_hash"
+          element={
+            <PrivateAuthRoute roles={[1, 2, 3]}>
+              <OrderDetail />
             </PrivateAuthRoute>
           }
         />

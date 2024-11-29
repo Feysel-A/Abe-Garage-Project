@@ -14,8 +14,19 @@ const createNewOrder = (newOrder, token) => {
   const response = fetch(`${api_url}/api/order`, requestOptions);
   return response;
 };
-
+//A function to get single order
+const getSingleOrder = async (order_hash) => {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+  const response = await fetch(`${api_url}/api/order/${order_hash}`, requestOptions);
+  return response;
+}
 const orderService = {
   createNewOrder,
+  getSingleOrder
 };
 export default orderService;

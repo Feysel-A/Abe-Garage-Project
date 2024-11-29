@@ -1,0 +1,156 @@
+.container {
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+.inner_container {
+  width: 70%;
+  margin: 0 auto;
+}
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+/* for completed progress #04af2f; */
+.name {
+  font-size: 2rem;
+  color: #2c2c2c;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 1rem;
+  color: #606060;
+  margin-bottom: 10px;
+}
+.statusContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.status {
+  display: inline-block;
+  padding: 10px 10px;
+  margin: 0 20px 20px 10px;
+  height: 40px;
+  background-color: hwb(41 7% 1%); /* Yellow */
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border-radius: 5px;
+}
+.serviceHeader {
+  padding-left: 30px;
+}
+.infoContainer {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  /* padding: 15px; */
+}
+
+.customerInfo,
+.vehicleInfo {
+  flex: 1;
+  padding: 25px;
+  background-color: #fff;
+  border-bottom: solid red;
+}
+.customerInfo {
+  margin-right: 20px;
+}
+.infoHeading {
+  font-size: 1.2rem;
+  color: #2c2c2c;
+  margin-bottom: 10px;
+  border-bottom: 2px solid hwb(41 7% 1%); /* Yellow */
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.servicesSection {
+  padding: 15px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-bottom: solid red;
+  margin-bottom: 20px;
+}
+
+.servicesHeading {
+  font-size: 1.5rem;
+  color: #2c2c2c;
+  margin-bottom: 20px;
+  border-bottom: 2px solid hwb(41 7% 1%); /* Yellow */
+  display: inline-block;
+  padding-bottom: 5px;
+}
+
+.serviceList {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  list-style: none;
+  padding: 18px;
+}
+
+.serviceItem {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  /* background-color: #f9f9f9; */
+}
+
+.serviceDetails {
+  flex: 1;
+}
+
+.serviceName {
+  font-size: 1.2rem;
+  color: #113a5cec;
+  margin-bottom: 5px;
+}
+
+.serviceDescription {
+  font-size: 0.9rem;
+  color: #606060;
+}
+
+.serviceStatus {
+  background-color: hwb(41 7% 1%);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  height: 35px;
+}
+.completed {
+  background-color: green;
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 5px;
+  height: 35px;
+}
+/*** Media Queries **/
+@media screen and (max-width: 768px) {
+  .table {
+    margin-left: -45px;
+  }
+  .statusContainer {
+    display: flex;
+    flex-direction: column;
+  }
+  .statusContainer span {
+    margin-top: -40px;
+    margin-bottom: 20px;
+    width: 25%;
+  }
+}
