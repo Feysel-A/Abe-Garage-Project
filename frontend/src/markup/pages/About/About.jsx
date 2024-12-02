@@ -9,7 +9,7 @@ import AboutUs from '../../components/AboutUs/AboutUs/AboutUs'
 function About() {
   return (
     <>
-      <AboutUs5 title={"About Us"}/>
+      <AboutUs5 title={"About Us"} subtitle={"About Us"}/>
       <AboutUs6/>
       <AboutUs/>
       <AboutUs2/>

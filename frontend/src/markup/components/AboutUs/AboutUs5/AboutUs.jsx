@@ -1,6 +1,6 @@
 import React from 'react'
 import img from  '../../../../assets/images/bg/bg2.png'
-function AboutUs({title}) {
+function AboutUs({title, subtitle}) {
   return (
     <section
       className="page-title"
@@ -12,7 +12,7 @@ function AboutUs({title}) {
           <li>
             <a href="index.html">home</a>
           </li>
-          <li>About us</li>
+          <li>{subtitle}</li>
         </ul>
       </div>
       <h1 data-parallax='{"x": 200}'>Car Repairing</h1>

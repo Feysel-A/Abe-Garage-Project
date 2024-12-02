@@ -6,7 +6,7 @@ import AboutUs4 from '../../components/AboutUs/AboutUs4/AboutUs4'
 function Contact() {
   return (
     <>
-      <AboutUs5 title={"Contact Us"} />
+      <AboutUs5 title={"Contact Us"}  subtitle={"Contact Us"}/>
       <ContactComponent/>
       <AboutUs4/>
     </>
