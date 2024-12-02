@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { json, useParams } from "react-router-dom";
+import { json, useNavigate, useParams } from "react-router-dom";
 import styles from "./CreateNewOrder.module.css";
 import { FaEdit } from "react-icons/fa";
 import { FaWindowClose } from "react-icons/fa";
@@ -21,6 +21,7 @@ function CreateNewOrder() {
   const [estimated_completion_date, setEstimatedCompletionDate] = useState("");
   const [order_total_price, setOrderTotalPrice] = useState("");
   const [spinner, setSpinner] = useState(false);
+  const navigator = useNavigate();
   //get token from auth context
   let token = "";
   const { employee } = useAuth();
@@ -59,6 +60,7 @@ function CreateNewOrder() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
+        navigator("/admin/orders");
       });
   };
   // console.log(newService)
@@ -229,7 +231,6 @@ function CreateNewOrder() {
                             )
                           }
                           className={styles.serviceCheckbox}
-                          required
                         />
                       </div>
                       <div className="d-flex align-items-center px-4"></div>

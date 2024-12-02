@@ -76,7 +76,7 @@ function EmployeeList() {
       .then((data) => {
         if (data?.data?.length !== 0) {
           console.log(data);
-          setEmployees(data.data);
+          setEmployees(data?.data);
         }
       })
       .catch((err) => {

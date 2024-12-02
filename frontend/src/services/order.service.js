@@ -22,11 +22,27 @@ const getSingleOrder = async (order_hash) => {
       "Content-Type": "application/json",
     },
   };
-  const response = await fetch(`${api_url}/api/order/${order_hash}`, requestOptions);
+  const response = await fetch(
+    `${api_url}/api/order/${order_hash}`,
+    requestOptions
+  );
   return response;
-}
+};
+//A function to get All orders
+const getAllOrders = async (token) => {
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+  const response = await fetch(`${api_url}/api/orders`, requestOptions);
+  return response;
+};
 const orderService = {
   createNewOrder,
-  getSingleOrder
+  getSingleOrder,
+  getAllOrders,
 };
 export default orderService;

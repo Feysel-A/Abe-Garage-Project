@@ -13,7 +13,7 @@ import Footer from "./markup/components/Footer/Footer";
 import "./assets/styles/custom.css";
 import Unauthorized from "./markup/pages/Unauthorized/Unauthorized";
 import PrivateAuthRoute from "./markup/components/Auth/PrivateAuthRoute";
-import Orders from "./markup/pages/Admin/Orders/Orders";
+import Orders from "./markup/pages/Admin/Orders/AllOrders/AllOrders";
 import Customers from "./markup/pages/Admin/Customer/Customer";
 import Employees from "./markup/pages/Admin/Employee/Employee";
 import About from "./markup/pages/About/About";
@@ -25,6 +25,7 @@ import AddOrder from "./markup/pages/Admin/AddOrder/AddOrder";
 import CustomerProfilePage from "./markup/pages/Admin/Customer/CustomerProfile/CustomerProfilePage";
 import CreateNewOrder from "./markup/pages/Admin/Orders/CreateNewOrder/CreateNewOrder";
 import OrderDetail from "./markup/pages/Admin/Orders/OrderDetail/OrderDetail";
+import AllOrders from "./markup/pages/Admin/Orders/AllOrders/AllOrders";
 function App() {
   return (
     <>
@@ -117,6 +118,14 @@ function App() {
           element={
             <PrivateAuthRoute roles={[1, 2, 3]}>
               <OrderDetail />
+            </PrivateAuthRoute>
+          }
+        />
+          <Route
+          path="admin/orders"
+          element={
+            <PrivateAuthRoute roles={[1, 2, 3]}>
+            <AllOrders/>
             </PrivateAuthRoute>
           }
         />
