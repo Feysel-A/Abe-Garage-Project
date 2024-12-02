@@ -91,6 +91,8 @@ async function getAllOrderss() {
 
     orders.order_hash, 
 
+    orders.active_order,
+
     customer_info.customer_first_name, 
 
     customer_info.customer_last_name,
