@@ -1,10 +1,18 @@
 import React from 'react'
-
+import SideBar from '../../../components/Admin/SIdeBar/SideBar'
+import CustomerList from '../../../components/Admin/Customer/CustomerList/CustomerList'
 function Customer() {
   return (
-    <div>
-      <h1>This is customers page</h1>
+    <div className="container-fluid admin-pages">
+    <div className="row">
+      <div className="col-md-3 admin-left-side">
+        <SideBar />
+      </div>
+      <div className="col-md-9">
+        <CustomerList/>
+      </div>
     </div>
+  </div>
   )
 }
 

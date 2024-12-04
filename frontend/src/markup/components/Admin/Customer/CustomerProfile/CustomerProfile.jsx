@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Customer.module.css";
 import { Table } from "react-bootstrap";
-import { format } from "date-fns";
 import { FaEdit, FaHandPointer, FaWindowClose } from "react-icons/fa";
 import { useAuth } from "../../../../../Context/AuthContext";
 import vehicleService from "../../../../../services/vehicle.service";

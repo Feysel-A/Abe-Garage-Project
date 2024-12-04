@@ -26,6 +26,7 @@ import CustomerProfilePage from "./markup/pages/Admin/Customer/CustomerProfile/C
 import CreateNewOrder from "./markup/pages/Admin/Orders/CreateNewOrder/CreateNewOrder";
 import OrderDetail from "./markup/pages/Admin/Orders/OrderDetail/OrderDetail";
 import AllOrders from "./markup/pages/Admin/Orders/AllOrders/AllOrders";
+import ServicePage from "./markup/pages/Admin/Service/Service";
 function App() {
   return (
     <>
@@ -89,6 +90,14 @@ function App() {
           }
         />
         <Route
+          path="admin/services"
+          element={
+            <PrivateAuthRoute roles={[1, 2, 3]}>
+              <ServicePage />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route
           path="/admin/order"
           element={
             <PrivateAuthRoute roles={[3]}>
@@ -121,11 +130,11 @@ function App() {
             </PrivateAuthRoute>
           }
         />
-          <Route
+        <Route
           path="admin/orders"
           element={
             <PrivateAuthRoute roles={[1, 2, 3]}>
-            <AllOrders/>
+              <AllOrders />
             </PrivateAuthRoute>
           }
         />
