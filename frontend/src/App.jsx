@@ -27,6 +27,8 @@ import CreateNewOrder from "./markup/pages/Admin/Orders/CreateNewOrder/CreateNew
 import OrderDetail from "./markup/pages/Admin/Orders/OrderDetail/OrderDetail";
 import AllOrders from "./markup/pages/Admin/Orders/AllOrders/AllOrders";
 import ServicePage from "./markup/pages/Admin/Service/Service";
+import AddCustomer from "./markup/pages/Admin/Customer/AddCustomer/AddCustomer";
+import EditCustomer from "./markup/pages/Admin/Customer/EditCustomer/EditCustomer"
 function App() {
   return (
     <>
@@ -114,6 +116,22 @@ function App() {
           }
         />
         {/* Add customer service Order Page Route*/}
+        <Route
+          path="/admin/add-customer"
+          element={
+            <PrivateAuthRoute roles={[2, 3]}>
+              <AddCustomer />
+            </PrivateAuthRoute>
+          }
+        />
+         <Route
+          path="/admin/edit-customer/:customer_hash"
+          element={
+            <PrivateAuthRoute roles={[2, 3]}>
+              <EditCustomer />
+            </PrivateAuthRoute>
+          }
+        />
         <Route
           path="admin/order/add-new-order/select-service/:customer_hash/:vehicle_id"
           element={

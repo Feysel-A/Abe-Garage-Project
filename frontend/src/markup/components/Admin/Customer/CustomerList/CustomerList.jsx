@@ -19,7 +19,7 @@ function CustomerList() {
         setCustomers(data?.data);
       })
       .catch((error) => console.error(error));
-  }, [customers]);
+  }, []);
 
   const handleSearch = (e) => {
     const query = e.target.value;
@@ -97,7 +97,7 @@ function CustomerList() {
                             <button
                               onClick={() =>
                                 navigator(
-                                  `/admin/customer/${customer.customer_hash}`
+                                  `/admin/edit-customer/${customer.customer_hash}`
                                 )
                               }
                             >
@@ -137,7 +137,7 @@ function CustomerList() {
                             <button
                               onClick={() =>
                                 navigator(
-                                  `/admin/customer/${customer.customer_hash}`
+                                  `/admin/edit-customer/${customer.customer_hash}`
                                 )
                               }
                             >
