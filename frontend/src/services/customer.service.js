@@ -1,5 +1,19 @@
 // Import from the env
 const api_url = import.meta.env.VITE_API_URL;
+// A function to send post request to create a new employee
+const addCustomer = async (formData, loggedInEmployeeToken) => {
+  const requestOptions = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": loggedInEmployeeToken,
+    },
+    body: JSON.stringify(formData),
+  };
+  console.log(requestOptions);
+  const response = await fetch(`${api_url}/api/add-customer`, requestOptions);
+  return response;
+};
 // A function to send get request to get all customers
 const getAllCustomer = async (token) => {
   // console.log(token);
@@ -46,6 +60,7 @@ const updateCustomer = async (formData, loggedInEmployeeToken) => {
   return response;
 };
 const customerService = {
+  addCustomer,
   getAllCustomer,
   getSingleCustomer,
   updateCustomer,

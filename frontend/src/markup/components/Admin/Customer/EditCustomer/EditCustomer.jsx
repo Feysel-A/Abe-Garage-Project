@@ -92,7 +92,7 @@ function EditCustomer() {
           <h2>
             Edit: {customer_first_name} {customer_last_name}{" "}
           </h2>
-          <h4>customer email:{customer_email}</h4>
+          <h4>customer email: {customer_email}</h4>
         </div>
         <div className="row clearfix">
           <div className="form-column col-lg-7">
