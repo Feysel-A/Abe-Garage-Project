@@ -54,7 +54,7 @@
     padding: 1rem;
     border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: #f5f5f5;
+    background-color: #fff;
   }
   
   .customerHeader {
@@ -124,12 +124,10 @@
      Form Container Module
   ======================== */
   .serviceForm {
-    width: 100%;
+    width: 90%;
     margin: 0.5rem auto;
-    background: #fff;
+    background: #f5f5f5;
     padding: 2rem;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .formHeader {
@@ -155,9 +153,43 @@
     border-collapse: collapse;
     margin-bottom: 1.5rem;
   }
-
-  @media screen and (max-width: 768px) {
-    .table {
-      margin-left: -45px;
-    }
+  /***service checkbox***/
+  input[type="checkbox"] {
+    transform: scale(1.8);
+    margin-top: 40px;
   }
+  .serviceStatus {
+    background-color: hwb(41 7% 1%);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    height: 35px;
+  }
+  .completed {
+    background-color: green;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    height: 35px;
+  }
+  .received{
+    background-color: darkgrey;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: bold;
+    padding: 5px 15px;
+    border-radius: 5px;
+    height: 35px;
+  }
+  @media screen and (max-width: 768px) {
+    .serviceStatus {
+      font-size: 0.8rem;
+    }
+    .completed {
+      font-size: 0.8rem;
+    }
+  }  

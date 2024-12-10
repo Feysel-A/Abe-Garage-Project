@@ -1,6 +1,6 @@
 import React from "react";
 import SideBar from "../../../../components/Admin/SIdeBar/SideBar";
-import CustomerProfile from "../../../../components/Admin/Customer/CustomerProfile/CustomerProfile";
+import AddOrder2 from "../../../../components/Admin/Orders/AddOrder2/AddOrder2";
 
 function AddOrderPage() {
   return (
@@ -11,7 +11,7 @@ function AddOrderPage() {
             <SideBar />
           </div>
           <div className="col-md-9">
-            <CustomerProfile />
+            <AddOrder2 />
           </div>
         </div>
       </div>

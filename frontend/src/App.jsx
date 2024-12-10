@@ -6,7 +6,6 @@ import "./assets/template_assets/css/bootstrap.css";
 import "./assets/template_assets/css/style.css";
 import "./assets/template_assets/css/responsive.css";
 import "./assets/template_assets/css/color.css";
-import "./assets/styles/custom.css";
 import Header from "./markup/components/Header/Header";
 import Footer from "./markup/components/Footer/Footer";
 //Import the custom styles
@@ -22,13 +21,14 @@ import Service from "./markup/pages/Service/Service";
 import Dashboard from "./markup/pages/Admin/AdminDashboard/Admin";
 import UpdateEmployee from "./markup/pages/Admin/Update/UpdateEmployee";
 import AddOrder from "./markup/pages/Admin/AddOrder/AddOrder";
-import CustomerProfilePage from "./markup/pages/Admin/Customer/CustomerProfile/CustomerProfilePage";
+import AddOrder2 from "./markup/pages/Admin/Orders/AddOrder/AddOrder";
 import CreateNewOrder from "./markup/pages/Admin/Orders/CreateNewOrder/CreateNewOrder";
 import OrderDetail from "./markup/pages/Admin/Orders/OrderDetail/OrderDetail";
 import AllOrders from "./markup/pages/Admin/Orders/AllOrders/AllOrders";
 import ServicePage from "./markup/pages/Admin/Service/Service";
 import AddCustomer from "./markup/pages/Admin/Customer/AddCustomer/AddCustomer";
 import EditCustomer from "./markup/pages/Admin/Customer/EditCustomer/EditCustomer"
+import CustomerProfile from "./markup/pages/Admin/Customer/CustomerProfile/CustomerProfilePage";
 function App() {
   return (
     <>
@@ -55,6 +55,14 @@ function App() {
           element={
             <PrivateAuthRoute roles={[2, 3]}>
               <Customers />
+            </PrivateAuthRoute>
+          }
+        />
+         <Route
+          path="/admin/customer-profile/:customer_hash"
+          element={
+            <PrivateAuthRoute roles={[2, 3]}>
+              <CustomerProfile />
             </PrivateAuthRoute>
           }
         />
@@ -108,10 +116,10 @@ function App() {
           }
         />
         <Route
-          path="/admin/customer-profile/:customer_hash"
+          path="/admin/customer/:customer_hash"
           element={
             <PrivateAuthRoute roles={[3]}>
-              <CustomerProfilePage />
+              <AddOrder2 />
             </PrivateAuthRoute>
           }
         />

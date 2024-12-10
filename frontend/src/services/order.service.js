@@ -15,12 +15,13 @@ const createNewOrder = (newOrder, token) => {
   return response;
 };
 //A function to get single order
-const getSingleOrder = async (order_hash) => {
+const getSingleOrder = async (order_hash, token) => {
   const requestOptions = {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
+    "x-access-token": token,
   };
   const response = await fetch(
     `${api_url}/api/order/${order_hash}`,
@@ -28,6 +29,21 @@ const getSingleOrder = async (order_hash) => {
   );
   return response;
 };
+//A function to get customer order
+const getSingleCustomerOrders = async (customer_hash, token) =>{
+  const requestOptions = {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      "x-access-token": token,
+    },
+  };
+  const response = await fetch(
+    `${api_url}/api/customer/orders/${customer_hash}`,
+    requestOptions
+  );
+  return response;
+}
 //A function to get All orders
 const getAllOrders = async (token) => {
   const requestOptions = {
@@ -44,5 +60,6 @@ const orderService = {
   createNewOrder,
   getSingleOrder,
   getAllOrders,
+  getSingleCustomerOrders
 };
 export default orderService;

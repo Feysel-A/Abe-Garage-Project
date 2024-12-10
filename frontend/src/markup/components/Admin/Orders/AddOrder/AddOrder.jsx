@@ -46,17 +46,16 @@ function AddOrder() {
           customer.customer_phone_number
             .toLowerCase()
             .includes(query.toLowerCase())
-            
       );
       setFilteredCustomers(filtered);
     } else {
       setFilteredCustomers([]);
     }
   };
-console.log(filteredCustomers)
+  console.log(filteredCustomers);
   const handleSelectCustomer = (customer_hash) => {
     navigate(
-      `/admin/customer-profile/${customer_hash}`
+      `/admin/customer/${customer_hash}`
       // ?view=chooseVehicle`
     );
   };
@@ -84,15 +83,15 @@ console.log(filteredCustomers)
         </div>
 
         {!searchQuery && (
-            <div className="form-group col-md-12">
-              <button
-                className="theme-btn btn-style-one"
-                type="submit"
-                data-loading-text="Please wait..."
-                onClick={handleAddCustomer}
-              >
-                <span>ADD NEW CUSTOMER</span>
-              </button>
+          <div className="form-group col-md-12">
+            <button
+              className="theme-btn btn-style-one"
+              type="submit"
+              data-loading-text="Please wait..."
+              onClick={handleAddCustomer}
+            >
+              <span>ADD NEW CUSTOMER</span>
+            </button>
           </div>
         )}
 
@@ -117,8 +116,9 @@ console.log(filteredCustomers)
                   <td>
                     <FaHandPointer
                       className={styles.pointerIcon}
-                      onClick={() => handleSelectCustomer(customer.customer_hash
-                      )}
+                      onClick={() =>
+                        handleSelectCustomer(customer.customer_hash)
+                      }
                     />
                   </td>
                 </tr>
