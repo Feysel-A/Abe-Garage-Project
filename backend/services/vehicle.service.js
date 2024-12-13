@@ -89,11 +89,10 @@ async function getSingleVehiclee(single) {
 
   // get the customer vehicle by its id
   const query1 =
-    "SELECT * FROM customer_vehicle_info WHERE customer_id =? AND vehicle_id = ?";
+    "SELECT * FROM customer_vehicle_info WHERE customer_id = ? ";
 
   const [rows1] = await connection.query(query1, [
     customer_id,
-    vehicle_id,
   ]);
 
   // console.log(rows1);
