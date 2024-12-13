@@ -27,8 +27,9 @@ import OrderDetail from "./markup/pages/Admin/Orders/OrderDetail/OrderDetail";
 import AllOrders from "./markup/pages/Admin/Orders/AllOrders/AllOrders";
 import ServicePage from "./markup/pages/Admin/Service/Service";
 import AddCustomer from "./markup/pages/Admin/Customer/AddCustomer/AddCustomer";
-import EditCustomer from "./markup/pages/Admin/Customer/EditCustomer/EditCustomer"
+import EditCustomer from "./markup/pages/Admin/Customer/EditCustomer/EditCustomer";
 import CustomerProfile from "./markup/pages/Admin/Customer/CustomerProfile/CustomerProfilePage";
+import UpdateVehicle from "./markup/pages/Admin/Customer/UpdateVehicle/UpdateVehiclePage";
 function App() {
   return (
     <>
@@ -53,15 +54,15 @@ function App() {
         <Route
           path="/admin/customers"
           element={
-            <PrivateAuthRoute roles={[2, 3]}>
+            <PrivateAuthRoute roles={[1, 2, 3]}>
               <Customers />
             </PrivateAuthRoute>
           }
         />
-         <Route
+        <Route
           path="/admin/customer-profile/:customer_hash"
           element={
-            <PrivateAuthRoute roles={[2, 3]}>
+            <PrivateAuthRoute roles={[1, 2, 3]}>
               <CustomerProfile />
             </PrivateAuthRoute>
           }
@@ -70,7 +71,7 @@ function App() {
         <Route
           path="/admin/employees"
           element={
-            <PrivateAuthRoute roles={[3]}>
+            <PrivateAuthRoute roles={[2, 3]}>
               <Employees />
             </PrivateAuthRoute>
           }
@@ -78,7 +79,7 @@ function App() {
         <Route
           path="/admin/add-employee"
           element={
-            <PrivateAuthRoute roles={[3]}>
+            <PrivateAuthRoute roles={[2, 3]}>
               <AddEmployee />
             </PrivateAuthRoute>
           }
@@ -132,11 +133,19 @@ function App() {
             </PrivateAuthRoute>
           }
         />
-         <Route
+        <Route
           path="/admin/edit-customer/:customer_hash"
           element={
             <PrivateAuthRoute roles={[2, 3]}>
               <EditCustomer />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route
+          path="/admin/edit-vehicle/:vehicle_id"
+          element={
+            <PrivateAuthRoute roles={[2, 3]}>
+              <UpdateVehicle />
             </PrivateAuthRoute>
           }
         />
