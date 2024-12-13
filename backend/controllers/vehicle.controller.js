@@ -4,7 +4,7 @@ const {
   getSingleVehiclee,
   updateVehiclee,
 } = require("../services/vehicle.service");
-
+const db = require("../config/db.config");
 async function addVehicle(req, res, next) {
   console.log(req.body);
 
@@ -82,6 +82,28 @@ async function getSingleVehicle(req, res, next) {
     });
   }
 }
+const getSingleVehicleById = async (req, res) => {
+  const { id } = req.params; // Get vehicle ID from URL params
+  try {
+    // Fetch the vehicle from the database
+    const vehicleQuery = "SELECT * FROM customer_vehicle_info WHERE vehicle_id = ?";
+    const [vehicle] = await db.query(vehicleQuery, [id]);
+
+    if (!vehicle || vehicle.length === 0) {
+      return res.status(404).json({ message: "Vehicle not found" });
+    }
+
+    // Optionally, fetch related data if needed
+    // For example, vehicle service history or owner details
+
+    res.status(200).json(vehicle[0]); // Return the vehicle details
+  } catch (error) {
+    console.error("Error fetching vehicle by ID:", error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+module.exports = { getVehicleById };
 
 // Update vehicle information
 const updateVehicle = async (req, res) => {
@@ -96,9 +118,7 @@ const updateVehicle = async (req, res) => {
       return res.status(404).json({ message: "Vehicle not found" });
     }
 
-    res
-      .status(200)
-      .json({ message: "Vehicle updated successfully"});
+    res.status(200).json({ message: "Vehicle updated successfully" });
   } catch (error) {
     console.error("Error updating vehicle:", error);
     res.status(500).json({ message: "Internal server error" });
@@ -109,5 +129,6 @@ module.exports = {
   addVehicle,
   getVehicleById,
   getSingleVehicle,
+  getSingleVehicleById,
   updateVehicle,
 };

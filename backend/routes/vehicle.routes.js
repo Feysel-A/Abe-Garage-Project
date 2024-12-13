@@ -18,8 +18,10 @@ router.get(
   "/api/vehicle/single/:customer_hash",
   vehicleController.getSingleVehicle
 );
+// Route to get a single vehicle by ID
+router.get("/api/vehicle/:id", vehicleController.getSingleVehicleById);
 // Route to update a customer's vehicle information
-router.put("/update-vehicle/:vehicle_id", vehicleController.updateVehicle);
+router.put("/api/update-vehicle/:vehicle_id", vehicleController.updateVehicle);
 
 // export the router
 module.exports = router;
