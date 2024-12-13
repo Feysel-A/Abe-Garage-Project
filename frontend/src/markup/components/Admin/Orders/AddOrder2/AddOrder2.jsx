@@ -39,7 +39,7 @@ function CustomerProfile() {
     const fetchVehicles = vehicleService
       .getSingleVehicle(customer_hash, token)
       .then((response) => response.json())
-      .then((data) => setVehicles(data.SingleVehicle[0]))
+      .then((data) => setVehicles(data.SingleVehicle))
       .catch((error) => console.error(error));
   }, []);
   console.log(vehicles);
@@ -99,27 +99,29 @@ function CustomerProfile() {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>{vehicles?.vehicle_year}</td>
-                  <td>{vehicles?.vehicle_make}</td>
-                  <td>{vehicles?.vehicle_model}</td>
-                  <td>{vehicles?.vehicle_tag}</td>
-                  <td>{vehicles?.vehicle_type}</td>
-                  <td>{vehicles?.vehicle_serial}</td>
-                  <td>{vehicles?.vehicle_color}</td>
-                  <td>{vehicles?.vehicle_mileage}</td>
-                  <td>
-                    <button>
-                      <FaHandPointer
-                        color="#EE0D19"
-                        className={styles.pointerIcon}
-                        onClick={() =>
-                          handleSelectCustomer(customer.customer_hash)
-                        }
-                      />
-                    </button>
-                  </td>
-                </tr>
+                {vehicles?.map((vehicles) => (
+                  <tr key={vehicles.vehicle_id}>
+                    <td>{vehicles?.vehicle_year}</td>
+                    <td>{vehicles?.vehicle_make}</td>
+                    <td>{vehicles?.vehicle_model}</td>
+                    <td>{vehicles?.vehicle_tag}</td>
+                    <td>{vehicles?.vehicle_type}</td>
+                    <td>{vehicles?.vehicle_serial}</td>
+                    <td>{vehicles?.vehicle_color}</td>
+                    <td>{vehicles?.vehicle_mileage}</td>
+                    <td>
+                      <button>
+                        <FaHandPointer
+                          color="#EE0D19"
+                          className={styles.pointerIcon}
+                          onClick={() =>
+                            handleSelectCustomer(customer.customer_hash)
+                          }
+                        />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
               </tbody>
             </Table>
           </div>
