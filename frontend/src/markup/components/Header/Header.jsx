@@ -79,6 +79,11 @@ function Header() {
                         <li>
                           <Link to="/contact">Contact Us</Link>
                         </li>
+                        {isLogged ? (
+                          <li>
+                            <Link to="/admin">Dashboard</Link>
+                          </li>
+                        ) : null}
                       </ul>
                     </div>
                   </nav>

@@ -28,9 +28,9 @@ const OrderDetails = () => {
     });
     fetchOrder();
     setServices(order?.order_services);
-  }, [order, services]);
-  console.log(order);
-  console.log(services);
+  }, [order]);
+  // console.log(order);
+  // console.log(services);
   return (
     <div className={styles.container}>
       {/* Header Section */}

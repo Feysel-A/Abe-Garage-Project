@@ -13,6 +13,9 @@ function AllOrders() {
   const orderDetail = (order_hash) => {
     navigator(`/admin/order/${order_hash}`);
   };
+  const editOrder = (order_hash) => {
+    navigator(`/admin/update-order/${order_hash}`);
+  };
   useEffect(() => {
     orderService
       .getAllOrders()
@@ -89,9 +92,7 @@ function AllOrders() {
 
                   <td>
                     <div className="edit-delete-icons">
-                      <button
-                      // onClick={() => editorder(order.order_uuid)}
-                      >
+                      <button onClick={() => editOrder(order?.order_hash)}>
                         <FaEdit />
                       </button>
                       {"  "}

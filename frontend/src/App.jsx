@@ -30,6 +30,7 @@ import AddCustomer from "./markup/pages/Admin/Customer/AddCustomer/AddCustomer";
 import EditCustomer from "./markup/pages/Admin/Customer/EditCustomer/EditCustomer";
 import CustomerProfile from "./markup/pages/Admin/Customer/CustomerProfile/CustomerProfilePage";
 import UpdateVehicle from "./markup/pages/Admin/Customer/UpdateVehicle/UpdateVehiclePage";
+import UpdateOrderStatus from "./markup/components/Admin/Orders/UpdateOrder/UpdateOrder";
 function App() {
   return (
     <>
@@ -162,6 +163,14 @@ function App() {
           element={
             <PrivateAuthRoute roles={[1, 2, 3]}>
               <OrderDetail />
+            </PrivateAuthRoute>
+          }
+        />
+        <Route
+          path="admin/update-order/:order_hash"
+          element={
+            <PrivateAuthRoute roles={[1, 2, 3]}>
+              <UpdateOrderStatus />
             </PrivateAuthRoute>
           }
         />
